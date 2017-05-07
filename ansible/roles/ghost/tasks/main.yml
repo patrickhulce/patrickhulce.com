@@ -1,0 +1,13 @@
+- name: create subfolder for ghost
+  file: state=directory path={{item}}
+  with_items:
+    - /opt/ghost
+    - /var/www/ghost
+- name: download ghost
+  get_url: url=https://ghost.org/zip/ghost-latest.zip dest=/opt/ghost/ghost.zip
+- name: check ghost
+  stat: path=/var/www/ghost/README.md
+  register: ghost_stat
+- name: unzip ghost
+  when: ghost_stat.stat.exists == False
+  unarchive: src=/opt/ghost/ghost.zip dest=/var/www/ghost remote_src=yes

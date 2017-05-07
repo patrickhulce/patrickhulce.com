@@ -1,0 +1,20 @@
+- name: setup the nginx site definition
+  copy: src={{ item }}.conf dest=/etc/nginx/sites-available/{{ item }}
+  with_items: "{{ sites }}"
+  notify:
+    - reload nginx
+- name: enable the nginx site definition
+  with_items: "{{ sites }}"
+  file:
+    src: /etc/nginx/sites-available/{{ item }}
+    dest: /etc/nginx/sites-enabled/{{ item }}
+    state: link
+  notify:
+    - reload nginx
+- name: disable other sites
+  with_items: "{{ disabled_sites }}"
+  file:
+    path: /etc/nginx/sites-enabled/{{ item }}
+    state: absent
+  notify:
+    - reload nginx

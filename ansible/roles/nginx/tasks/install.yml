@@ -1,0 +1,24 @@
+- name: install nginx
+  apt: pkg=nginx
+- name: install password tools
+  pip: name=passlib
+- name: copy nginx.conf over
+  copy: src=nginx.conf dest=/etc/nginx/nginx.conf
+  notify:
+    - reload nginx
+- name: copy metrics.conf over
+  copy: src=metrics.conf dest=/etc/nginx/conf.d/metrics.conf
+  notify:
+    - reload nginx
+- name: ensure no default server is specified
+  file: dest=/etc/nginx/sites-enabled/default state=absent
+  notify:
+    - reload nginx
+- name: ensure nginx is running
+  service: name=nginx state=started enabled=yes
+- name: ensure nginx directories exist
+  become_user: www-data
+  file: state=directory path={{item}}
+  with_items:
+    - /var/www
+

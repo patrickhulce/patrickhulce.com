@@ -1,0 +1,28 @@
+- name: add ansible ppa
+  apt_repository: repo='ppa:ansible/ansible'
+- name: add node apt-key
+  apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
+- name: add node repo
+  apt_repository: repo='deb https://deb.nodesource.com/node_6.x xenial main'
+- name: add node-src repo
+  apt_repository: repo='deb-src https://deb.nodesource.com/node_6.x xenial main'
+- name: install base packages
+  apt: name={{ item }} update_cache=yes
+  with_items:
+    - software-properties-common
+    - ansible
+    - git
+    - ntp
+    - python-pip
+    - nodejs
+    - unzip
+- name: install node modules
+  npm: name={{ item }} global=yes
+  with_items:
+    - yarn
+    - pm2
+    - http-server
+- name: setup directories
+  file: state=directory path={{item}}
+  with_items:
+    - /opt
