@@ -1,0 +1,36 @@
+- hosts: all
+  become: yes
+  roles:
+    - common
+    - ghost
+  tasks:
+    - name: download latest version of ghost
+      get_url: url=https://ghost.org/zip/ghost-latest.zip dest=/opt/ghost/ghost.zip force=yes
+    - name: make room for the upgrade
+      file: path=/opt/ghost/upgrade state=absent
+    - name: make room for the upgrade
+      file: path=/opt/ghost/upgrade state=directory
+    - name: unzip ghost upgrade
+      unarchive: src=/opt/ghost/ghost.zip dest=/opt/ghost/upgrade remote_src=yes
+    - name: remove the old version
+      file: path={{ item }} state=absent
+      with_items:
+        - /var/www/ghost/core
+        - /var/www/ghost/content/themes/casper
+    - name: copy the upgraded core over
+      become_user: patrick
+      command: cp -R /opt/ghost/upgrade/{{ item }} /var/www/ghost/{{ item }}
+      with_items:
+        - core
+        - content/themes/casper
+        - index.js
+        - package.json
+        - npm-shrinkwrap.json
+    - name: install dependencies
+      become_user: patrick
+      command: npm install --production
+      args:
+        chdir: /var/www/ghost
+    - name: restart ghost
+      become_user: patrick
+      command: pm2 restart Ghost
