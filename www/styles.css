@@ -1,0 +1,118 @@
+.wrapper,
+.wrapper > div {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.background {
+  background: url(background.jpg) center;
+  background-size: cover;
+}
+
+.overlay {
+  background: url(overlay.svg) center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.content,
+.content__header,
+.circle-icon,
+.content__header nav ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  color: white;
+  text-shadow: 1px 1px #555;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.content__header {
+  flex: 10;
+  font-size: 125%;
+  max-width: 100%;
+}
+
+.content__header h1 {
+  margin-bottom: 10px;
+}
+
+.content__header .byline {
+  text-align: center;
+}
+
+.content__header nav ul {
+  list-style: none;
+  padding-left: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.content__header nav ul li {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+.content__header nav a,
+.content__header nav a:visited,
+.content__header nav a:focus {
+  color: white;
+  font-size: 30px;
+  text-decoration: none;
+}
+
+.content__header nav a:hover,
+.content__header nav a:hover .circle-icon__circle {
+  color: #96cdff;
+  border-color: #96cdff;
+}
+
+.content__footer {
+  margin-bottom: 15px;
+}
+
+/** Circle Items */
+.circle-icon__circle {
+  height: 40px;
+  width: 40px;
+
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+.circle-icon__circle,
+.circle-icon__circle::before {
+  line-height: 40px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.fa-file-text.circle-icon__circle::before {
+  font-size: 22px;
+}
+
+.fa-rss.circle-icon__circle::before {
+  font-size: 26px;
+}
+
+.fa-linkedin.circle-icon__circle::before {
+  font-size: 26px;
+}
+
+.fa-instagram.circle-icon__circle::before {
+  font-size: 28px;
+}
+
+.circle-icon__subtext {
+  font-size: 12pt;
+  margin-top: 5px;
+}
