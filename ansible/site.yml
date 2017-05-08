@@ -4,3 +4,8 @@
     - common
     - nginx
     - ghost
+  tasks:
+    - name: copy the files
+      synchronize: src=../www/ dest=/var/www/patrickhulce.com/ checksum=yes
+    - name: ensure they have proper permissions
+      file: path=/var/www/patrickhulce.com state=directory owner=www-data group=www-data recurse=yes
