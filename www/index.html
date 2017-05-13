@@ -15,7 +15,13 @@
   </head>
   <body>
     <div class="wrapper">
-      <div class="background"></div>
+      <div class="background">
+        <picture>
+          <source media="(min-width: 600px)" srcset="background.jpg">
+          <source media="(min-width: 200px)" srcset="background-portrait.jpg">
+          <img src="background.jpg" alt="Yosemite Half Dome">
+        </picture>
+      </div>
       <div class="overlay"></div>
       <div class="content">
         <header class="content__header">
