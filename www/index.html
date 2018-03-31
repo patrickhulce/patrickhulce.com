@@ -16,11 +16,7 @@
   <body>
     <div class="wrapper">
       <div class="background">
-        <picture>
-          <source media="(min-width: 600px)" srcset="background.jpg">
-          <source media="(min-width: 200px)" srcset="background-portrait.jpg">
-          <img src="background.jpg" alt="Yosemite Half Dome">
-        </picture>
+        <video id="time-lapse" src="golden-gate-loop-minified.mp4" autoplay muted loop>
       </div>
       <div class="overlay"></div>
       <div class="content">
@@ -69,9 +65,10 @@
           </nav>
         </header>
         <footer class="content__footer">
-         Copyright © 2017 Patrick Hulce
+         Copyright © 2017-2018 Patrick Hulce
         </footer>
       </div>
     </div>
+    <script>document.getElementById('time-lapse').playbackRate = 0.8</script>
   </body>
 </html>
