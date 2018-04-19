@@ -22,11 +22,19 @@
 }
 
 @media (min-aspect-ratio: 7/8) {
+  .background {
+    background-position-x: 20%;
+  }
+
   .background video {
     transform: translateX(20%);
   }
 }
 @media (min-aspect-ratio: 4/3) {
+  .background {
+    background-position-x: 0%;
+  }
+
   .background video {
     transform: translateX(0%);
   }
