@@ -8,4 +8,4 @@ jobs:
       - checkout
       - run:
           name: lhci autorun
-          command: lhci autorun --collect.staticDistDir=./www --upload.target=lhci || echo "LHCI failed!"
+          command: echo $CIRCLE_BRANCH && lhci autorun --collect.staticDistDir=./www --upload.target=lhci || echo "LHCI failed!"
